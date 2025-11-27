@@ -122,7 +122,6 @@ final class TaskTableViewCell: UITableViewCell {
                 attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue]
             )
             titleLabel.attributedText = attributedTitle
-            // Делаем заголовок и описание серыми
             titleLabel.textColor = .secondaryLabel
             descriptionLabel.textColor = .secondaryLabel
             

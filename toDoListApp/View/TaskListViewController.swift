@@ -49,7 +49,14 @@ final class TaskListViewController: UITableViewController {
     private func setupSearchBar() {
         searchBar.delegate = self
         searchBar.placeholder = "Search"
-        searchBar.searchBarStyle = .minimal // .prominent 
+        //searchBar.searchBarStyle = .minimal // .prominent
+        
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+                searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
+            ])
     }
    
     private func setupBottomToolbar() {

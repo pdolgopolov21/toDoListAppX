@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AddEditTaskModel {
+final class AddEditTaskModel {
     
     // MARK: - Properties
     

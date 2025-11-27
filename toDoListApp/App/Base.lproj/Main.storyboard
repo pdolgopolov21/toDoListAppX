@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PDE-Ze-EhG">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -16,12 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="fY2-sG-j5m">
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="CrC-Cm-P3Y">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" spellCheckingType="yes"/>
                             <connections>
-                                <outlet property="delegate" destination="Hfx-bZ-eKG" id="t6H-98-1ko"/>
+                                <outlet property="delegate" destination="Hfx-bZ-eKG" id="nQR-bC-P8q"/>
                             </connections>
                         </searchBar>
                         <prototypes>
@@ -41,13 +42,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="WGU-kN-vRC"/>
                     <connections>
-                        <outlet property="searchBar" destination="fY2-sG-j5m" id="cFV-0d-aAc"/>
+                        <outlet property="searchBar" destination="CrC-Cm-P3Y" id="hcf-mN-gfv"/>
                         <segue destination="mcZ-St-THl" kind="show" identifier="showAddEditScreen" id="1cR-k1-20S"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="369-s9-cKx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1834.0909090909092" y="-1194.3514644351465"/>
+            <point key="canvasLocation" x="-1835.625" y="-1194.7183098591549"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OMy-mB-cSF">

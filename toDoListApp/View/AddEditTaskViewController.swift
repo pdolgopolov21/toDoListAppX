@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddEditTaskViewController: UIViewController {
+final class AddEditTaskViewController: UIViewController {
 
     // MARK: - Properties
     

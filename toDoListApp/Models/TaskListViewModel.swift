@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TaskListViewModel {
+final class TaskListViewModel {
     
     // MARK: - Public Properties
 
