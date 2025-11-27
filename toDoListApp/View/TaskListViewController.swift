@@ -188,6 +188,48 @@ extension TaskListViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "showAddEditScreen", sender: indexPath)
     }
+    
+    
+//
+//    private func createTargetedPreview(for cell: UITableViewCell, in tableView: UITableView) -> UITargetedPreview {
+//        // Создаем параметры для превью
+//        let parameters = UIPreviewParameters()
+//        // Используем фон ячейки, чтобы избежать "белой вспышки"
+//        parameters.backgroundColor = cell.backgroundColor ?? .systemBackground
+//        
+//        // Создаем "цель" для превью, ЯВНО указывая ее центр.
+//        // Это ключевой момент. Мы говорим системе, чтобы она ориентировалась на центр ячейки.
+//        let target = UIPreviewTarget(container: tableView, center: cell.center)
+//        
+//        // Создаем и возвращаем UITargetedPreview с нашей целью.
+//        return UITargetedPreview(view: cell.contentView, parameters: parameters, target: target)
+//    }
+
+//
+//    override func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+//        
+//        // Получаем ячейку
+//        guard let indexPath = configuration.identifier as? IndexPath,
+//              let cell = tableView.cellForRow(at: indexPath) else {
+//            return nil
+//        }
+//        
+//        // Возвращаем самый простой возможный превью.
+//        // Мы передаем саму ячейку, а не её contentView, и не задаем никаких параметров.
+//        // Это заставляет систему рассматривать ячейку как единый целое.
+//        return UITargetedPreview(view: cell)
+//    }
+//
+//    override func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+//        
+//        // Используем ту же логику для согласованности
+//        guard let indexPath = configuration.identifier as? IndexPath,
+//              let cell = tableView.cellForRow(at: indexPath) else {
+//            return nil
+//        }
+//        
+//        return UITargetedPreview(view: cell)
+//    }
 }
 
 

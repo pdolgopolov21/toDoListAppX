@@ -34,9 +34,27 @@
 		EF98F8B52ED4CD5E001E6BEA /* Exceptions for "toDoListApp" folder in "toDoListAppX" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				App/Info.plist,
+				Test/toDoListAppTests.swift,
+				Test/toDoListAppUITests.swift,
+				Test/toDoListAppUITestsLaunchTests.swift,
 			);
 			target = EF98F8892ED4CD5C001E6BEA /* toDoListAppX */;
+		};
+		EFDDB7B52ED8BF9900CFBA1E /* Exceptions for "toDoListApp" folder in "toDoListAppXTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Test/toDoListAppTests.swift,
+			);
+			target = EF98F8A22ED4CD5E001E6BEA /* toDoListAppXTests */;
+		};
+		EFDDB7B62ED8BF9900CFBA1E /* Exceptions for "toDoListApp" folder in "toDoListAppXUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Test/toDoListAppUITests.swift,
+				Test/toDoListAppUITestsLaunchTests.swift,
+			);
+			target = EF98F8AC2ED4CD5E001E6BEA /* toDoListAppXUITests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -45,18 +63,10 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				EF98F8B52ED4CD5E001E6BEA /* Exceptions for "toDoListApp" folder in "toDoListAppX" target */,
+				EFDDB7B52ED8BF9900CFBA1E /* Exceptions for "toDoListApp" folder in "toDoListAppXTests" target */,
+				EFDDB7B62ED8BF9900CFBA1E /* Exceptions for "toDoListApp" folder in "toDoListAppXUITests" target */,
 			);
 			path = toDoListApp;
-			sourceTree = "<group>";
-		};
-		EF98F8A62ED4CD5E001E6BEA /* toDoListAppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = toDoListAppTests;
-			sourceTree = "<group>";
-		};
-		EF98F8B02ED4CD5E001E6BEA /* toDoListAppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = toDoListAppUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -89,10 +99,8 @@
 		EF98F8812ED4CD5C001E6BEA = {
 			isa = PBXGroup;
 			children = (
-				EFF9750D2ED85FE600C6D288 /* toDoListApp.xctestplan */,
 				EF98F88C2ED4CD5C001E6BEA /* toDoListApp */,
-				EF98F8A62ED4CD5E001E6BEA /* toDoListAppTests */,
-				EF98F8B02ED4CD5E001E6BEA /* toDoListAppUITests */,
+				EFF9750D2ED85FE600C6D288 /* toDoListApp.xctestplan */,
 				EF98F88B2ED4CD5C001E6BEA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -145,9 +153,6 @@
 			dependencies = (
 				EF98F8A52ED4CD5E001E6BEA /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				EF98F8A62ED4CD5E001E6BEA /* toDoListAppTests */,
-			);
 			name = toDoListAppXTests;
 			packageProductDependencies = (
 			);
@@ -167,9 +172,6 @@
 			);
 			dependencies = (
 				EF98F8AF2ED4CD5E001E6BEA /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				EF98F8B02ED4CD5E001E6BEA /* toDoListAppUITests */,
 			);
 			name = toDoListAppXUITests;
 			packageProductDependencies = (
@@ -293,7 +295,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QQ69DYWC4W;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = toDoListApp/Info.plist;
+				INFOPLIST_FILE = toDoListApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -325,7 +327,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QQ69DYWC4W;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = toDoListApp/Info.plist;
+				INFOPLIST_FILE = toDoListApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

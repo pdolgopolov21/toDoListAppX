@@ -15,8 +15,8 @@ final class TaskPreviewViewController: UIViewController {
         self.task = task
         super.init(nibName: nil, bundle: nil)
         
-        preferredContentSize = CGSize(width: UIScreen.main.bounds.width - 32,
-                                      height: 300)
+        //выравнивание не помогло - но оставим
+        preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: 300)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:)") }
@@ -32,23 +32,21 @@ final class TaskPreviewViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        // КЛЮЧЕВОЙ БЛОК: высота под контент
-        let targetWidth = preferredContentSize.width - 32
-        let fittingSize = CGSize(width: targetWidth, height: .greatestFiniteMagnitude)
+        let availableTextWidth = view.bounds.width - 32
+        let fittingSize = CGSize(width: availableTextWidth, height: .greatestFiniteMagnitude)
         
         let requiredHeight = contentView.systemLayoutSizeFitting(
             fittingSize,
             withHorizontalFittingPriority: .required,
             verticalFittingPriority: .fittingSizeLevel
-        ).height + 32
+        ).height + 32 // Добавляем отступы сверху и снизу
         
-        let maxHeight = UIScreen.main.bounds.height * 0.8  // чтобы меню влезло
+        let maxHeight = UIScreen.main.bounds.height * 0.8
         
         preferredContentSize.height = min(requiredHeight, maxHeight)
     }
     
     private func setupUI() {
-        
         // scroll
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +67,7 @@ final class TaskPreviewViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor) 
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
         
         // ЛЕЙБЛЫ
@@ -96,6 +94,7 @@ final class TaskPreviewViewController: UIViewController {
         contentView.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
         
+        // Эти ограничения создают визуальные отступы в 16pt с каждой стороны
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -117,17 +116,16 @@ final class TaskPreviewViewController: UIViewController {
                 string: title,
                 attributes: [
                     .strikethroughStyle: NSUnderlineStyle.single.rawValue,
-                    .foregroundColor: UIColor.secondaryLabel // Добавляем цвет
+                    .foregroundColor: UIColor.secondaryLabel
                 ]
             )
         } else {
             titleLabel.attributedText = NSAttributedString(
                 string: title,
-                attributes: [.foregroundColor: UIColor.label] // Устанавливаем основной цвет
+                attributes: [.foregroundColor: UIColor.label]
             )
         }
     }
-    
 }
 
 extension DateFormatter {

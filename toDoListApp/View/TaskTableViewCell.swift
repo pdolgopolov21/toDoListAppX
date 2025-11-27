@@ -72,6 +72,7 @@ final class TaskTableViewCell: UITableViewCell {
     // MARK: - Setup Methods
 
     private func setupUI() {
+        
         contentView.addSubview(checkboxButton)
         contentView.addSubview(verticalStackView)
         
@@ -88,6 +89,7 @@ final class TaskTableViewCell: UITableViewCell {
             verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
         ])
+            
     }
     
     private func setupCheckboxButton() {
