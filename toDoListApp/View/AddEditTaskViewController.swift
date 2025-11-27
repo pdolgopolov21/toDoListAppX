@@ -4,7 +4,7 @@ class AddEditTaskViewController: UIViewController {
 
     // MARK: - Properties
     
-    var taskToEdit: Task? // Это свойство устанавливается извне, перед показом экрана
+    var taskToEdit: Task? 
     
     private var model: AddEditTaskModel! // Модель будет создана в viewDidLoad
 
@@ -44,7 +44,6 @@ class AddEditTaskViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
         //    Создаем модель, передавая ей задачу для редактирования, если есть
         //    и сервис для работы с данными, реализующий протокол CoreDataServiceProtocol
