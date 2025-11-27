@@ -219,21 +219,19 @@ extension TaskListViewController {
            )
        }
 
-       // ----> ДОБАВЬТЕ ЭТОТ МЕТОТ <----
        func tableView(_ tableView: UITableView,
                       contextMenuConfiguration configuration: UIContextMenuConfiguration,
                       highlightPreviewForItemAt indexPath: IndexPath) -> UITargetedPreview? {
 
            // Получаем ячейку, чтобы вычислить ее центр по вертикали
            guard let cell = tableView.cellForRow(at: indexPath) else {
-               // Если ячейку не получили, возвращаем nil, чтобы система использовала поведение по умолчанию
                return nil
            }
            
            let target = UIPreviewTarget(
-               container: tableView,
-               center: CGPoint(x: tableView.bounds.midX, y: cell.frame.midY)
-           )
+                   container: tableView,
+                   center: CGPoint(x: tableView.bounds.midX, y: cell.frame.midY) // <--- ВОТ ОНО!
+               )
 
            let dummyView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
            dummyView.backgroundColor = .clear

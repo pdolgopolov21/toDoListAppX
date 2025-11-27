@@ -138,8 +138,8 @@ final class TaskTableViewCell: UITableViewCell {
         }
         
         checkboxButton.configuration = updatedConfig
-        
-        descriptionLabel.text = task.taskDescription.isEmpty ? "Нет описания" : task.taskDescription
+            // Нет описания
+        descriptionLabel.text = task.taskDescription.isEmpty ? "" : task.taskDescription
         dateLabel.text = dateFormatter.string(from: task.createdDate)
     }
     
