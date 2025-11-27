@@ -48,8 +48,8 @@ final class TaskListViewController: UITableViewController {
     // MARK: - Setup Methods
     private func setupSearchBar() {
         searchBar.delegate = self
-        searchBar.placeholder = "Поиск задач"
-        searchBar.searchBarStyle = .minimal
+        searchBar.placeholder = "Search"
+        searchBar.searchBarStyle = .minimal // .prominent 
     }
    
     private func setupBottomToolbar() {
@@ -57,7 +57,8 @@ final class TaskListViewController: UITableViewController {
         let addButton = UIButton(type: .system)
         addButton.accessibilityIdentifier = "addButton"
         addButton.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-        addButton.tintColor = .systemBlue
+        addButton.tintColor = .systemYellow // .systemBlue
+        
         addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         let iconBarButton = UIBarButtonItem(customView: addButton)
         
