@@ -113,8 +113,8 @@ final class TaskTableViewCell: UITableViewCell {
         var updatedConfig = checkboxButton.configuration
         
         if task.isCompleted {
-            updatedConfig?.image = UIImage(systemName: "checkmark.circle.fill")
-            updatedConfig?.baseForegroundColor = .systemBlue
+            updatedConfig?.image = UIImage(systemName: "checkmark.circle")
+            updatedConfig?.baseForegroundColor = .systemYellow // .systemBlue
             
             // Зачеркиваем заголовок
             let attributedTitle = NSAttributedString(
@@ -148,7 +148,6 @@ final class TaskTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        // Сбрасываем все, что может вызывать конфликты
         taskId = nil
         onCheckboxTapped = nil
         
@@ -157,7 +156,7 @@ final class TaskTableViewCell: UITableViewCell {
         config?.image = nil
         checkboxButton.configuration = config
         
-        //  Сбрасываем и attributedText, и text
+        //  Сбрасываем и attributedText, text
         titleLabel.attributedText = nil
         titleLabel.text = nil
         
