@@ -1,12 +1,19 @@
+//
+//  AddEditTaskViewController.swift
+//  toDoListApp
+//
+//  Created by Pavel Dolgopolov on 27.11.2025.
+//
+
 import UIKit
 
 class AddEditTaskViewController: UIViewController {
 
     // MARK: - Properties
     
-    var taskToEdit: Task? 
+    var taskToEdit: Task?
     
-    private var model: AddEditTaskModel! // Модель будет создана в viewDidLoad
+    private var model: AddEditTaskModel!
 
     // MARK: - UI Elements
     
@@ -39,15 +46,15 @@ class AddEditTaskViewController: UIViewController {
     }()
     
     private var originalTextViewInsets: UIEdgeInsets = .zero
+    
+    // свойство для хранения констрейнта заголовка
+    private var titleTextFieldTopConstraint: NSLayoutConstraint!
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //    Создаем модель, передавая ей задачу для редактирования, если есть
-        //    и сервис для работы с данными, реализующий протокол CoreDataServiceProtocol
-        //    внедряем зависимость от CoreDataService
+        
         self.model = AddEditTaskModel(taskToEdit: taskToEdit, dataService: CoreDataService.shared)
         
         self.navigationItem.largeTitleDisplayMode = .never
@@ -77,7 +84,6 @@ class AddEditTaskViewController: UIViewController {
             let titleText = titleTextField.text ?? ""
             let descriptionText = descriptionTextView.textColor == .label ? descriptionTextView.text ?? "" : ""
             
-            // Передаем данные из UI в модель перед сохранением
             model.update(title: titleText, description: descriptionText)
             model.saveOrDelete()
         }
@@ -104,8 +110,12 @@ class AddEditTaskViewController: UIViewController {
     }
     
     private func setupConstraints() {
+        // Создаем и сохраняем констрейнт, а не активируем его сразу
+        titleTextFieldTopConstraint = titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8)
+        
         NSLayoutConstraint.activate([
-            titleTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            // Используем сохраненный констрейнт
+            titleTextFieldTopConstraint,
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
@@ -143,11 +153,41 @@ class AddEditTaskViewController: UIViewController {
             let cursorRect = descriptionTextView.caretRect(for: descriptionTextView.selectedTextRange!.start)
             descriptionTextView.scrollRectToVisible(cursorRect, animated: true)
         }
+        
+        // логика для горизонтальной ориентации
+        // Проверяем текущую ориентацию интерфейса
+        let isLandscape = view.window?.windowScene?.interfaceOrientation.isLandscape ?? false
+
+        if isLandscape {
+            // Скрываем кнопку "Назад"
+            navigationItem.hidesBackButton = true
+            
+            // Поднимаем заголовок, изменяя константу констрейнта
+            // Отрицательное значение поднимет его выше безопасной области
+            titleTextFieldTopConstraint.constant = -30
+
+            // Анимируем изменения для плавности
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
         descriptionTextView.contentInset = originalTextViewInsets
         descriptionTextView.scrollIndicatorInsets = originalTextViewInsets
+        
+        // все в исходное состояние
+        // Показываем кнопку "Назад"
+        navigationItem.hidesBackButton = false
+        
+        // Возвращаем заголовок на исходную позицию
+        titleTextFieldTopConstraint.constant = 8
+        
+        // Анимируем изменения
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: - Data Population
