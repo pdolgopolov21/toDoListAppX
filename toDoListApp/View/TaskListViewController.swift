@@ -189,47 +189,61 @@ extension TaskListViewController {
         performSegue(withIdentifier: "showAddEditScreen", sender: indexPath)
     }
     
-    
-//
-//    private func createTargetedPreview(for cell: UITableViewCell, in tableView: UITableView) -> UITargetedPreview {
-//        // Создаем параметры для превью
-//        let parameters = UIPreviewParameters()
-//        // Используем фон ячейки, чтобы избежать "белой вспышки"
-//        parameters.backgroundColor = cell.backgroundColor ?? .systemBackground
-//        
-//        // Создаем "цель" для превью, ЯВНО указывая ее центр.
-//        // Это ключевой момент. Мы говорим системе, чтобы она ориентировалась на центр ячейки.
-//        let target = UIPreviewTarget(container: tableView, center: cell.center)
-//        
-//        // Создаем и возвращаем UITargetedPreview с нашей целью.
-//        return UITargetedPreview(view: cell.contentView, parameters: parameters, target: target)
-//    }
+    // MARK: - Context Menu Configuration
+    override func tableView(_ tableView: UITableView,
+                      contextMenuConfigurationForRowAt indexPath: IndexPath,
+                      point: CGPoint) -> UIContextMenuConfiguration? {
+           
+           let task = viewModel.task(at: indexPath)
 
-//
-//    override func tableView(_ tableView: UITableView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-//        
-//        // Получаем ячейку
-//        guard let indexPath = configuration.identifier as? IndexPath,
-//              let cell = tableView.cellForRow(at: indexPath) else {
-//            return nil
-//        }
-//        
-//        // Возвращаем самый простой возможный превью.
-//        // Мы передаем саму ячейку, а не её contentView, и не задаем никаких параметров.
-//        // Это заставляет систему рассматривать ячейку как единый целое.
-//        return UITargetedPreview(view: cell)
-//    }
-//
-//    override func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-//        
-//        // Используем ту же логику для согласованности
-//        guard let indexPath = configuration.identifier as? IndexPath,
-//              let cell = tableView.cellForRow(at: indexPath) else {
-//            return nil
-//        }
-//        
-//        return UITargetedPreview(view: cell)
-//    }
+           return UIContextMenuConfiguration(
+               identifier: indexPath as NSCopying,
+               previewProvider: {
+                   TaskPreviewViewController(task: task)
+               },
+               actionProvider: { _ in
+                   let edit = UIAction(title: "Редактировать", image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
+                       self?.performSegue(withIdentifier: "showAddEditScreen", sender: indexPath)
+                   }
+
+                   let share = UIAction(title: "Поделиться", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
+                       self?.shareTask(title: task.title)
+                   }
+
+                   let delete = UIAction(title: "Удалить", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+                       self?.deleteTask(taskId: task.id)
+                   }
+
+                   return UIMenu(title: "", children: [edit, share, delete])
+               }
+           )
+       }
+
+       // ----> ДОБАВЬТЕ ЭТОТ МЕТОТ <----
+       func tableView(_ tableView: UITableView,
+                      contextMenuConfiguration configuration: UIContextMenuConfiguration,
+                      highlightPreviewForItemAt indexPath: IndexPath) -> UITargetedPreview? {
+
+           // Получаем ячейку, чтобы вычислить ее центр по вертикали
+           guard let cell = tableView.cellForRow(at: indexPath) else {
+               // Если ячейку не получили, возвращаем nil, чтобы система использовала поведение по умолчанию
+               return nil
+           }
+           
+           let target = UIPreviewTarget(
+               container: tableView,
+               center: CGPoint(x: tableView.bounds.midX, y: cell.frame.midY)
+           )
+
+           let dummyView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+           dummyView.backgroundColor = .clear
+           
+           let parameters = UIPreviewParameters()
+           parameters.backgroundColor = .clear
+
+           return UITargetedPreview(view: dummyView, parameters: parameters, target: target)
+       }
+  
 }
 
 
@@ -273,45 +287,6 @@ extension TaskListViewController {
 
     private func deleteTask(taskId: UUID) {
         viewModel.deleteTask(for: taskId)
-    }
-    
-    override func tableView(_ tableView: UITableView,
-                   contextMenuConfigurationForRowAt indexPath: IndexPath,
-                   point: CGPoint) -> UIContextMenuConfiguration? {
-        
-        // Получаем ячейку и координаты кнопки
-        guard let cell = tableView.cellForRow(at: indexPath) as? TaskTableViewCell else { return nil }
-        let buttonFrame = cell.checkboxButton.frame
-        
-        // Переводим координаты нажатия в систему координат ячейки
-        let pointInCell = tableView.convert(point, to: cell)
-         
-        if buttonFrame.contains(pointInCell) {
-            return nil
-        }
-        
-        let task = viewModel.task(at: indexPath)
-        return UIContextMenuConfiguration(
-            identifier: indexPath as NSCopying,
-            previewProvider: {
-                TaskPreviewViewController(task: task)
-            },
-            actionProvider: { _ in
-                let edit = UIAction(title: "Редактировать", image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
-                    self?.performSegue(withIdentifier: "showAddEditScreen", sender: indexPath)
-                }
-
-                let share = UIAction(title: "Поделиться", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
-                    self?.shareTask(title: task.title)
-                }
-
-                let delete = UIAction(title: "Удалить", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
-                    self?.deleteTask(taskId: task.id)
-                }
-
-                return UIMenu(title: "", children: [edit, share, delete])
-            }
-        )
     }
     
 }

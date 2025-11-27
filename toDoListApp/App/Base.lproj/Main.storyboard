@@ -11,7 +11,7 @@
         <!--Root View Controller-->
         <scene sceneID="sxJ-oN-mZ9">
             <objects>
-                <tableViewController id="Hfx-bZ-eKG" customClass="TaskListViewController" customModule="toDoListApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Hfx-bZ-eKG" customClass="TaskListViewController" customModule="toDoListAppX" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="1gN-cu-DK6">
                         <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,7 +25,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="pVq-d0-tMc" customClass="TaskTableViewCell" customModule="toDoListApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="pVq-d0-tMc" customClass="TaskTableViewCell" customModule="toDoListAppX" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="94" width="440" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pVq-d0-tMc" id="Gga-bE-2yz">
@@ -68,7 +68,7 @@
         <!--Add Edit Task View Controller-->
         <scene sceneID="6XD-JC-4zR">
             <objects>
-                <viewController id="mcZ-St-THl" customClass="AddEditTaskViewController" customModule="toDoListApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mcZ-St-THl" customClass="AddEditTaskViewController" customModule="toDoListAppX" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="asu-Xa-VwT">
                         <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

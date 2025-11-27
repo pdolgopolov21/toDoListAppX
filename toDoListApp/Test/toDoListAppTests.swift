@@ -57,7 +57,6 @@ final class ToDoListTests: XCTestCase {
         
         wait(for: [expectation], timeout: 2.0)
         
-        // Assert (Проверка)
         let tasks = coreDataService.fetchTasks()
         XCTAssertEqual(tasks.count, 1, "Should be one task in the store")
         XCTAssertEqual(tasks.first?.title, title)

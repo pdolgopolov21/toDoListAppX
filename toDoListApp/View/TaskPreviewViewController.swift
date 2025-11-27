@@ -15,11 +15,11 @@ final class TaskPreviewViewController: UIViewController {
         self.task = task
         super.init(nibName: nil, bundle: nil)
         
-        //выравнивание не помогло - но оставим
         preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: 300)
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:)") }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,18 +32,23 @@ final class TaskPreviewViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let availableTextWidth = view.bounds.width - 32
-        let fittingSize = CGSize(width: availableTextWidth, height: .greatestFiniteMagnitude)
-        
-        let requiredHeight = contentView.systemLayoutSizeFitting(
+        let availableWidth = scrollView.bounds.width
+
+        let fittingSize = CGSize(width: availableWidth, height: UIView.noIntrinsicMetric)
+        let requiredContentSize = contentView.systemLayoutSizeFitting(
             fittingSize,
             withHorizontalFittingPriority: .required,
             verticalFittingPriority: .fittingSizeLevel
-        ).height + 32 // Добавляем отступы сверху и снизу
+        )
         
-        let maxHeight = UIScreen.main.bounds.height * 0.8
+        // Устанавливаем contentSize для scrollView
+        scrollView.contentSize = requiredContentSize
+        let maxPreviewHeight = UIScreen.main.bounds.height * 0.8
+        let finalHeight = min(requiredContentSize.height, maxPreviewHeight)
         
-        preferredContentSize.height = min(requiredHeight, maxHeight)
+        let finalWidth = availableWidth
+        
+        self.preferredContentSize = CGSize(width: finalWidth, height: finalHeight)
     }
     
     private func setupUI() {
@@ -94,7 +99,6 @@ final class TaskPreviewViewController: UIViewController {
         contentView.addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
         
-        // Эти ограничения создают визуальные отступы в 16pt с каждой стороны
         NSLayoutConstraint.activate([
             stack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -135,3 +139,4 @@ extension DateFormatter {
         return f
     }()
 }
+
